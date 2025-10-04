@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserController } from './user/user.controller';
@@ -11,6 +11,7 @@ import { CustomerModule } from './customer/customer.module';
 import { MynameController } from './myname/myname.controller';
 import { UserRolesController } from './user-roles/user-roles.controller';
 import { ExceptionController } from './exception/exception.controller';
+import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 
 @Module({
   imports: [EmployeeModule, CategoryModule, StudentModule, CustomerModule],
@@ -24,4 +25,10 @@ import { ExceptionController } from './exception/exception.controller';
   ],
   providers: [AppService, ProductService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  // configure method me batate hain ke kaun sa middleware kahan apply karna hai
+  configure(consumer: MiddlewareConsumer) {
+    // LoggerMiddleware apply kiya gaya hai saare routes ('*') ke liye
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
