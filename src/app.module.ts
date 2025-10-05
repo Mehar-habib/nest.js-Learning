@@ -22,6 +22,7 @@ import { StudentNewModule } from './student-new/student-new.module';
 import { User2Module } from './user2/user2.module';
 import { Employee2Module } from './employee2/employee2.module';
 import { Product2Module } from './product2/product2.module';
+import { LibaryModule } from './libary/libary.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { Product2Module } from './product2/product2.module';
     User2Module,
     Employee2Module,
     Product2Module,
+    LibaryModule,
   ],
   controllers: [
     AppController,
